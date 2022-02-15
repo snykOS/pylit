@@ -1,27 +1,26 @@
 Metadata-Version: 2.1
-Name: pylint
-Version: 2.12.2
-Summary: python code static checker
-Home-page: UNKNOWN
-Author: Python Code Quality Authority
-Author-email: code-quality@python.org
-License: GPL-2.0-or-later
-Project-URL: Homepage, https://www.pylint.org/
-Project-URL: Source Code, https://github.com/PyCQA/pylint
-Project-URL: What's New, https://pylint.pycqa.org/en/latest/whatsnew/
-Project-URL: Bug Tracker, https://github.com/PyCQA/pylint/issues
-Project-URL: Discord Server, https://discord.gg/Egy6P8AMB5
-Project-URL: Docs: User Guide, https://pylint.pycqa.org/en/latest/
-Project-URL: Docs: Contributing, https://pylint.pycqa.org/en/latest/development_guide/contribute.html
-Project-URL: Docs: Technical Reference, https://pylint.pycqa.org/en/latest/technical_reference/index.html
-Keywords: static code analysis linter python lint
-Platform: UNKNOWN
+Name: pytest
+Version: 7.0.1
+Summary: pytest: simple powerful testing with Python
+Home-page: https://docs.pytest.org/en/latest/
+Author: Holger Krekel, Bruno Oliveira, Ronny Pfannschmidt, Floris Bruynooghe, Brianna Laugher, Florian Bruhin and others
+License: MIT
+Project-URL: Changelog, https://docs.pytest.org/en/stable/changelog.html
+Project-URL: Twitter, https://twitter.com/pytestdotorg
+Project-URL: Source, https://github.com/pytest-dev/pytest
+Project-URL: Tracker, https://github.com/pytest-dev/pytest/issues
+Keywords: test,unittest
+Platform: unix
+Platform: linux
+Platform: osx
+Platform: cygwin
+Platform: win32
 Classifier: Development Status :: 6 - Mature
-Classifier: Environment :: Console
 Classifier: Intended Audience :: Developers
-Classifier: License :: OSI Approved :: GNU General Public License v2 (GPLv2)
-Classifier: Operating System :: OS Independent
-Classifier: Programming Language :: Python
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: MacOS :: MacOS X
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: POSIX
 Classifier: Programming Language :: Python :: 3
 Classifier: Programming Language :: Python :: 3 :: Only
 Classifier: Programming Language :: Python :: 3.6
@@ -29,185 +28,180 @@ Classifier: Programming Language :: Python :: 3.7
 Classifier: Programming Language :: Python :: 3.8
 Classifier: Programming Language :: Python :: 3.9
 Classifier: Programming Language :: Python :: 3.10
-Classifier: Programming Language :: Python :: Implementation :: CPython
-Classifier: Programming Language :: Python :: Implementation :: PyPy
-Classifier: Topic :: Software Development :: Debuggers
-Classifier: Topic :: Software Development :: Quality Assurance
+Classifier: Topic :: Software Development :: Libraries
 Classifier: Topic :: Software Development :: Testing
-Requires-Python: >=3.6.2
+Classifier: Topic :: Utilities
+Requires-Python: >=3.6
 Description-Content-Type: text/x-rst
+Provides-Extra: testing
 License-File: LICENSE
-License-File: CONTRIBUTORS.txt
+
+.. image:: https://github.com/pytest-dev/pytest/raw/main/doc/en/img/pytest_logo_curves.svg
+   :target: https://docs.pytest.org/en/stable/
+   :align: center
+   :height: 200
+   :alt: pytest
 
 
-README for Pylint - https://pylint.pycqa.org/
-=============================================
+------
 
-.. image:: https://github.com/PyCQA/pylint/actions/workflows/ci.yaml/badge.svg?branch=main
-    :target: https://github.com/PyCQA/pylint/actions
+.. image:: https://img.shields.io/pypi/v/pytest.svg
+    :target: https://pypi.org/project/pytest/
 
-.. image:: https://coveralls.io/repos/github/PyCQA/pylint/badge.svg?branch=main
-    :target: https://coveralls.io/github/PyCQA/pylint?branch=main
+.. image:: https://img.shields.io/conda/vn/conda-forge/pytest.svg
+    :target: https://anaconda.org/conda-forge/pytest
 
+.. image:: https://img.shields.io/pypi/pyversions/pytest.svg
+    :target: https://pypi.org/project/pytest/
 
-.. image:: https://img.shields.io/pypi/v/pylint.svg
-    :alt: Pypi Package version
-    :target: https://pypi.python.org/pypi/pylint
+.. image:: https://codecov.io/gh/pytest-dev/pytest/branch/main/graph/badge.svg
+    :target: https://codecov.io/gh/pytest-dev/pytest
+    :alt: Code coverage Status
 
-.. image:: https://readthedocs.org/projects/pylint/badge/?version=latest
-    :target: https://pylint.readthedocs.io/en/latest/?badge=latest
-    :alt: Documentation Status
+.. image:: https://github.com/pytest-dev/pytest/workflows/main/badge.svg
+    :target: https://github.com/pytest-dev/pytest/actions?query=workflow%3Amain
 
-.. image:: https://img.shields.io/badge/code%20style-black-000000.svg
-    :target: https://github.com/ambv/black
-
-.. image:: https://results.pre-commit.ci/badge/github/PyCQA/pylint/main.svg
-   :target: https://results.pre-commit.ci/latest/github/PyCQA/pylint/main
+.. image:: https://results.pre-commit.ci/badge/github/pytest-dev/pytest/main.svg
+   :target: https://results.pre-commit.ci/latest/github/pytest-dev/pytest/main
    :alt: pre-commit.ci status
 
-.. |tideliftlogo| image:: https://raw.githubusercontent.com/PyCQA/pylint/main/doc/media/Tidelift_Logos_RGB_Tidelift_Shorthand_On-White.png
-   :width: 75
-   :height: 60
-   :alt: Tidelift
+.. image:: https://img.shields.io/badge/code%20style-black-000000.svg
+    :target: https://github.com/psf/black
 
-.. list-table::
-   :widths: 10 100
+.. image:: https://www.codetriage.com/pytest-dev/pytest/badges/users.svg
+    :target: https://www.codetriage.com/pytest-dev/pytest
 
-   * - |tideliftlogo|
-     - Professional support for pylint is available as part of the `Tidelift
-       Subscription`_.  Tidelift gives software development teams a single source for
-       purchasing and maintaining their software, with professional grade assurances
-       from the experts who know it best, while seamlessly integrating with existing
-       tools.
+.. image:: https://readthedocs.org/projects/pytest/badge/?version=latest
+    :target: https://pytest.readthedocs.io/en/latest/?badge=latest
+    :alt: Documentation Status
 
-.. _Tidelift Subscription: https://tidelift.com/subscription/pkg/pypi-pylint?utm_source=pypi-pylint&utm_medium=referral&utm_campaign=readme
+.. image:: https://img.shields.io/badge/Discord-pytest--dev-blue
+    :target: https://discord.com/invite/pytest-dev
+    :alt: Discord
 
-
-======
-Pylint
-======
-
-**It's not just a linter that annoys you!**
-
-Pylint is a Python static code analysis tool which looks for programming errors,
-helps enforcing a coding standard, sniffs for code smells and offers simple refactoring
-suggestions.
-
-It's highly configurable, having special pragmas to control its errors and warnings
-from within your code, as well as from an extensive configuration file.
-It is also possible to write your own plugins for adding your own checks or for
-extending pylint in one way or another.
-
-It's a free software distributed under the GNU General Public Licence unless
-otherwise specified.
-
-Development is hosted on GitHub: https://github.com/PyCQA/pylint/
-
-You can use the code-quality@python.org mailing list to discuss about
-Pylint. Subscribe at https://mail.python.org/mailman/listinfo/code-quality/
-or read the archives at https://mail.python.org/pipermail/code-quality/
-
-Pull requests are amazing and most welcome.
-
-Install
--------
-
-Pylint can be simply installed by running::
-
-    pip install pylint
-
-If you are using Python 3.6.2+, upgrade to get full support for your version::
-
-    pip install pylint --upgrade
-
-If you want to install from a source distribution, extract the tarball and run
-the following command ::
-
-    python setup.py install
+.. image:: https://img.shields.io/badge/Libera%20chat-%23pytest-orange
+    :target: https://web.libera.chat/#pytest
+    :alt: Libera chat
 
 
-Do make sure to do the same for astroid, which is used internally by pylint.
+The ``pytest`` framework makes it easy to write small tests, yet
+scales to support complex functional testing for applications and libraries.
 
-For debian and rpm packages, use your usual tools according to your Linux distribution.
+An example of a simple test:
 
-More information about installation and available distribution format
-can be found here_.
+.. code-block:: python
+
+    # content of test_sample.py
+    def inc(x):
+        return x + 1
+
+
+    def test_answer():
+        assert inc(3) == 5
+
+
+To execute it::
+
+    $ pytest
+    ============================= test session starts =============================
+    collected 1 items
+
+    test_sample.py F
+
+    ================================== FAILURES ===================================
+    _________________________________ test_answer _________________________________
+
+        def test_answer():
+    >       assert inc(3) == 5
+    E       assert 4 == 5
+    E        +  where 4 = inc(3)
+
+    test_sample.py:5: AssertionError
+    ========================== 1 failed in 0.04 seconds ===========================
+
+
+Due to ``pytest``'s detailed assertion introspection, only plain ``assert`` statements are used. See `getting-started <https://docs.pytest.org/en/stable/getting-started.html#our-first-test-run>`_ for more examples.
+
+
+Features
+--------
+
+- Detailed info on failing `assert statements <https://docs.pytest.org/en/stable/how-to/assert.html>`_ (no need to remember ``self.assert*`` names)
+
+- `Auto-discovery
+  <https://docs.pytest.org/en/stable/explanation/goodpractices.html#python-test-discovery>`_
+  of test modules and functions
+
+- `Modular fixtures <https://docs.pytest.org/en/stable/explanation/fixtures.html>`_ for
+  managing small or parametrized long-lived test resources
+
+- Can run `unittest <https://docs.pytest.org/en/stable/how-to/unittest.html>`_ (or trial),
+  `nose <https://docs.pytest.org/en/stable/how-to/nose.html>`_ test suites out of the box
+
+- Python 3.6+ and PyPy3
+
+- Rich plugin architecture, with over 850+ `external plugins <https://docs.pytest.org/en/latest/reference/plugin_list.html>`_ and thriving community
+
 
 Documentation
 -------------
 
-The documentation lives at https://pylint.pycqa.org/.
-
-Pylint is shipped with following additional commands:
-
-* pyreverse: an UML diagram generator
-* symilar: an independent similarities checker
-* epylint: Emacs and Flymake compatible Pylint
+For full documentation, including installation, tutorials and PDF documents, please see https://docs.pytest.org/en/stable/.
 
 
-Testing
--------
+Bugs/Requests
+-------------
 
-We use tox_ and pytest-benchmark_ for running the test suite. You should be able to install it with::
-
-    pip install tox pytest pytest-benchmark
+Please use the `GitHub issue tracker <https://github.com/pytest-dev/pytest/issues>`_ to submit bugs or request features.
 
 
-To run the test suite for a particular Python version, you can do::
+Changelog
+---------
 
-    tox -e py37
-
-
-To run individual tests with ``tox``, you can do::
-
-    tox -e py37 -- -k name_of_the_test
+Consult the `Changelog <https://docs.pytest.org/en/stable/changelog.html>`__ page for fixes and enhancements of each version.
 
 
-We use pytest_ for testing ``pylint``, which you can use without using ``tox`` for a faster development cycle.
+Support pytest
+--------------
 
-If you want to run tests on a specific portion of the code with pytest_, (pytest-cov_) and your local python version::
+`Open Collective`_ is an online funding platform for open and transparent communities.
+It provides tools to raise money and share your finances in full transparency.
 
-    # ( pip install pytest-cov )
-    # Everything:
-    python3 -m pytest tests/
-    # Everything in tests/message with coverage for the relevant code:
-    python3 -m pytest tests/message/ --cov=pylint.message
-    coverage html
-    # Only the functional test "missing_kwoa_py3":
-    python3 -m pytest "tests/test_functional.py::test_functional[missing_kwoa_py3]"
+It is the platform of choice for individuals and companies that want to make one-time or
+monthly donations directly to the project.
 
+See more details in the `pytest collective`_.
 
-Do not forget to clone astroid_ and install the last version::
+.. _Open Collective: https://opencollective.com
+.. _pytest collective: https://opencollective.com/pytest
 
 
-    git clone https://github.com/PyCQA/astroid.git
+pytest for enterprise
+---------------------
 
-    # From source
-    python3 astroid/setup.py build sdist
-    pip3 install astroid/dist/astroid*.tar.gz
+Available as part of the Tidelift Subscription.
 
-    # Using an editable installation
-    cd astroid
-    python3 -m pip install -e .
+The maintainers of pytest and thousands of other packages are working with Tidelift to deliver commercial support and
+maintenance for the open source dependencies you use to build your applications.
+Save time, reduce risk, and improve code health, while paying the maintainers of the exact dependencies you use.
 
+`Learn more. <https://tidelift.com/subscription/pkg/pypi-pytest?utm_source=pypi-pytest&utm_medium=referral&utm_campaign=enterprise&utm_term=repo>`_
 
-For more detailed information, check the documentation.
+Security
+^^^^^^^^
 
-.. _here: https://pylint.pycqa.org/en/latest/user_guide/installation.html
-.. _tox: https://tox.readthedocs.io/en/latest/
-.. _pytest: https://docs.pytest.org/en/latest/
-.. _pytest-benchmark: https://pytest-benchmark.readthedocs.io/en/latest/index.html
-.. _pytest-cov: https://pypi.org/project/pytest-cov/
-.. _astroid: https://github.com/PyCQA/astroid
+pytest has never been associated with a security vulnerability, but in any case, to report a
+security vulnerability please use the `Tidelift security contact <https://tidelift.com/security>`_.
+Tidelift will coordinate the fix and disclosure.
+
 
 License
 -------
 
-pylint is, with a few exceptions listed below, `GPLv2 <https://github.com/PyCQA/pylint/blob/main/LICENSE>`_.
+Copyright Holger Krekel and others, 2004.
 
-The icon files are licensed under the `CC BY-SA 4.0 <https://creativecommons.org/licenses/by-sa/4.0/>`_ license:
+Distributed under the terms of the `MIT`_ license, pytest is free and open source software.
 
-- `doc/logo.png <https://raw.githubusercontent.com/PyCQA/pylint/main/doc/logo.png>`_
-- `doc/logo.svg <https://raw.githubusercontent.com/PyCQA/pylint/main/doc/logo.svg>`_
+.. _`MIT`: https://github.com/pytest-dev/pytest/blob/main/LICENSE
 
 
